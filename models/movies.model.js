@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const moviesSchema = new mongoose.Schema(
+const movieSchema = new mongoose.Schema(
   {
     title: {
       type: String,
@@ -24,6 +24,7 @@ const moviesSchema = new mongoose.Schema(
           "Sports",
           "Musical",
           "Others",
+          "Romance",
         ],
       },
     ],

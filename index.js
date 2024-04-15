@@ -1,52 +1,32 @@
-// Require the database connection
-require("./db");
+const { initializeDatabase } = require("./db/db.connect");
 
-// Require the Car model
-const Car = require("./models/car");
+const Movie = require("./models/movies.model");
 
-// Define function to add car data
-async function addCarData() {
-  const newCar = new Car({
-    make: "Toyota",
-    model: "Corolla",
-    year: 2022,
-  });
+initializeDatabase();
 
+const newMovie = {
+  title: "New Movie",
+  releaseYear: 2023,
+  genre: ["Drama"],
+  director: "Yashas",
+  actors: ["Actor 1", "Actor 2"],
+  language: "Hindi",
+  country: "India",
+  rating: 10,
+  plot: "A man who becomes a developer",
+  awards: "Oscar",
+  posterUrl: "https://example.com/new-poster1.jpg",
+  trailerUrl: "https://example.com/new-trailer1.mp4",
+};
+
+async function createMovie(newMovie) {
   try {
-    const savedCar = await newCar.save();
-    console.log("Car data saved successfully:", savedCar);
+    const movie = new Movie(newMovie);
+    const saveMovie = await movie.save();
+    console.log("New Movie Data", saveMovie);
   } catch (error) {
-    console.error("Error saving car data:", error);
+    throw error;
   }
 }
 
-// Define function to add another car data
-async function addAnotherCarData() {
-  const anotherCar = new Car({
-    make: "Honda",
-    model: "Civic",
-    year: 2023,
-  });
-
-  try {
-    const savedAnotherCar = await anotherCar.save();
-    console.log("Another car data saved successfully:", savedAnotherCar);
-  } catch (error) {
-    console.error("Error saving another car data:", error);
-  }
-}
-
-// Define function to find all cars
-async function findAllCars() {
-  try {
-    const allCars = await Car.find();
-    console.log("All cars in the database:", allCars);
-  } catch (error) {
-    console.error("Error fetching all cars:", error);
-  }
-}
-
-// Call functions to add car data, add another car data, and find all cars
-addCarData();
-addAnotherCarData();
-findAllCars();
+createMovie(newMovie);
