@@ -68,4 +68,35 @@ async function getMovieByDirector(directorName) {
   }
 }
 
-getMovieByDirector("Yashas");
+// getMovieByDirector("Yashas");
+
+// Find movie by id and update its rating
+
+async function updateMovie(movieId, dataToUpdate) {
+  try {
+    const updateMovie = await Movie.findByIdAndUpdate(movieId, dataToUpdate, {
+      new: true,
+    });
+    console.log(updateMovie);
+  } catch (error) {
+    throw error;
+  }
+}
+
+updateMovie("661d1b5c43a0fab75c50e65d", { releaseYear: 1999 });
+
+async function updateMovieDetails(movieTitle, dataToUpdate) {
+  try {
+    const updateMovie = await Movie.findOneAndUpdate(
+      { title: movieTitle },
+      dataToUpdate,
+      {
+        new: true,
+      },
+    );
+    console.log(updateMovie);
+  } catch (error) {
+    console.log("Error in Changing Data", error);
+  }
+}
+updateMovieDetails("New Movie", { releaseYear: 2024 });
