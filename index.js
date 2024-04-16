@@ -29,4 +29,43 @@ async function createMovie(newMovie) {
   }
 }
 
-createMovie(newMovie);
+// createMovie(newMovie);
+
+// find a movie with a perticular title
+
+async function readMovieByTitle(movieTitle) {
+  try {
+    const movie = await Movie.findOne({ title: movieTitle });
+    console.log(movie);
+  } catch (error) {
+    throw error;
+  }
+}
+
+// readMovieByTitle("PK");
+
+// To get all the movies in the database
+
+async function readAllMovies() {
+  try {
+    const allMovies = await Movie.find();
+    console.log(allMovies);
+  } catch (error) {
+    throw error;
+  }
+}
+
+// readAllMovies();
+
+//Get movie By director Name
+
+async function getMovieByDirector(directorName) {
+  try {
+    const movie = await Movie.findOne({ director: directorName });
+    console.log(movie);
+  } catch (error) {
+    throw error;
+  }
+}
+
+getMovieByDirector("Yashas");
