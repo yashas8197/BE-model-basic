@@ -83,7 +83,7 @@ async function updateMovie(movieId, dataToUpdate) {
   }
 }
 
-updateMovie("661d1b5c43a0fab75c50e65d", { releaseYear: 1999 });
+// updateMovie("661d1b5c43a0fab75c50e65d", { releaseYear: 1999 });
 
 async function updateMovieDetails(movieTitle, dataToUpdate) {
   try {
@@ -99,4 +99,29 @@ async function updateMovieDetails(movieTitle, dataToUpdate) {
     console.log("Error in Changing Data", error);
   }
 }
-updateMovieDetails("New Movie", { releaseYear: 2024 });
+// updateMovieDetails("New Movie", { releaseYear: 2024 });
+
+//find a movie from id and delete from the database
+
+async function deleteMovie(movieId) {
+  try {
+    const deleteMovie = await Movie.findByIdAndDelete(movieId);
+  } catch (error) {
+    console.log("Error is deleting Movie", error);
+  }
+}
+
+// deleteMovie("661ce0f83df4d25a9dc011d6");
+
+// find a movie from name and delete from the database
+
+async function deleteMovieFromDb(movieTitle) {
+  try {
+    const deletedMovie = await Movie.findOneAndDelete({ title: movieTitle });
+    console.log("This movie was deleted", deletedMovie);
+  } catch (error) {
+    throw error;
+  }
+}
+
+deleteMovieFromDb("PK");
